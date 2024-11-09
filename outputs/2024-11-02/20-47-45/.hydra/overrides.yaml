@@ -1,0 +1,3 @@
+- model.path=/home/axton/axton-workspace/csc2125/model_weights/lama_weights
+- indir=/home/axton/axton-workspace/csc2125/models/lama/imgs
+- outdir=/home/axton/axton-workspace/csc2125/models/lama/output
