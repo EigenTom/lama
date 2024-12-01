@@ -41,7 +41,7 @@ def main(predict_config: OmegaConf):
         if sys.platform != 'win32':
             register_debug_signal_handlers()  # kill -10 <pid> will result in traceback dumped into log
 
-        device = torch.device("cpu")
+        device = torch.device("cuda")
 
         train_config_path = os.path.join(predict_config.model.path, 'config.yaml')
         with open(train_config_path, 'r') as f:
@@ -55,7 +55,7 @@ def main(predict_config: OmegaConf):
         checkpoint_path = os.path.join(predict_config.model.path, 
                                        'models', 
                                        predict_config.model.checkpoint)
-        model = load_checkpoint(train_config, checkpoint_path, strict=False, map_location='cpu')
+        model = load_checkpoint(train_config, checkpoint_path, strict=False, map_location=device)
         model.freeze()
         if not predict_config.get('refine', False):
             model.to(device)
